@@ -48,6 +48,7 @@ weaponList <- [
         case "!hs":
             ScriptPrintMessageChatAll("\x01 \x07 HEADSHOTS ONLY DISABLED");
             SendToConsole("mp_damage_headshot_only 0");
+            break;
         
         // End warmup
         case ".end":
