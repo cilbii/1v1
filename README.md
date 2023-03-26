@@ -1,2 +1,2 @@
 # 1v1
- a script for csgo 1v1's that gives you random weapons each round
+ A vscript for custom maps intended for 1v1's that gives players a random weapon each round.
