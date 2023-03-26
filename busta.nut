@@ -145,7 +145,7 @@ function giveWeapons(player, selectedWeapon) // Gives random weapons to the play
     equipper.__KeyValueFromInt("weapon_deagle", 0);
     equipper.__KeyValueFromInt(selectedWeapon, 0);
 	equipper.__KeyValueFromInt("weapon_knife", 0);
-	equipper.__KeyValueFromInt("item_kevlar", 0 );
+	equipper.__KeyValueFromInt("item_assaultsuit", 0 );
     equipper.ValidateScriptScope();
 
     // Give things to the player, then destroy the game_player_equip
