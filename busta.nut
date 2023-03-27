@@ -140,7 +140,13 @@ function giveWeapons(player, selectedWeapon) // Gives random weapons to the play
     // Creating a game_player_equip entity, which is needed to give players stuff
     local equipper = Entities.CreateByClassname("game_player_equip"); 
 
-
+    // Things to give to the player
+	equipper.__KeyValueFromInt("spawnflags", 5);
+    equipper.__KeyValueFromInt("weapon_deagle", 0);
+    equipper.__KeyValueFromInt(selectedWeapon, 0);
+	equipper.__KeyValueFromInt("weapon_knife", 0);
+	equipper.__KeyValueFromInt("item_assaultsuit", 0 );
+    equipper.ValidateScriptScope();
 
     // Give things to the player, then destroy the game_player_equip
     EntFireByHandle(equipper, "Use", "", 0, player, null);
