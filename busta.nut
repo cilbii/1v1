@@ -1,3 +1,18 @@
+// Round types
+enum STATE {
+    DEFAULT,
+    RIFLES,
+    PISTOLS,
+    AWPS,
+    SCOUTS
+}
+
+// Initializes variable only once
+if (!("gameState" in getroottable()))
+{
+    ::gameState <- STATE.DEFAULT;
+}
+
 // List of possible weapons
 weaponList <- [
     "weapon_ak47",
@@ -6,6 +21,8 @@ weaponList <- [
     "weapon_awp",
     "weapon_deagle"
 ]
+
+selectedWeapon <- null;
 
 ::OnGameEvent_player_say <- function(data) // Event listener for player commands
 {  
@@ -95,6 +112,12 @@ weaponList <- [
             SendToConsole("mp_scrambleteams");
             break;
 
+        case ".default":
+            gameState = STATE.DEFAULT;
+            ScriptPrintMessageChatAll("\x01 \x05 DEFAULT GUNS ENABLED");
+            SendToConsole("mp_restartgame 1");
+            break;
+
         case ".pistols":
             gameState = STATE.PISTOLS;
             ScriptPrintMessageChatAll("\x01 \x05 PISTOLS ONLY ENABLED");
@@ -123,30 +146,41 @@ weaponList <- [
     }
 }.bindenv(this)
 
-enum STATE {
-    DEFAULT = "default",
-    RIFLES = "rifles",
-    PISTOLS = "pistols",
-    AWPS = "awps",
-    SCOUTS = "scouts"
-}
-
-// Initializes variable only once
-if (!("gameState" in getroottable()))
-{
-    ::gameState <- STATE.DEFAULT;
-}
-
 function OnPostSpawn() // This function is called at the start of each round
 {
-    ScriptPrintMessageChatAll("\x01 \x05 Game Type: " + gameState);
-
     // Gets a list of all players
     local players = getPlayers();
 
-    // Picks a random weapon from the weapon list
-    local randomNum = RandomInt(0, weaponList.len() - 1);
-    local selectedWeapon = weaponList[randomNum];
+    // Gives weapons depending on game state
+    switch (gameState)
+    {
+        // Random weapons
+        case STATE.DEFAULT:
+            local randomNum = RandomInt(0, weaponList.len() - 1);
+            selectedWeapon = weaponList[randomNum];
+            break;
+
+        // Rifles only
+        case STATE.RIFLES:
+            local randomNum = RandomInt(0, 2); // First 3 weapons in the list are rifles
+            selectedWeapon = weaponList[randomNum];
+            break;
+
+        // Pistols only
+        case STATE.PISTOLS:
+            selectedWeapon = "weapon_usp_silencer";
+            break;
+
+        // AWPs only
+        case STATE.AWPS:
+            selectedWeapon = "weapon_awp";
+            break;
+
+        // Scouts only
+        case STATE.SCOUTS:
+            selectedWeapon = "weapon_scout";
+            break;
+    }
 
     // Removes weapons from all players, then gives them a specific weapon
     for (local i = 0; i < players.len(); i++)
@@ -186,7 +220,17 @@ function giveWeapons(player, selectedWeapon) // Gives random weapons to the play
     equipper.__KeyValueFromInt("weapon_deagle", 0);
     equipper.__KeyValueFromInt(selectedWeapon, 0);
 	equipper.__KeyValueFromInt("weapon_knife", 0);
-	equipper.__KeyValueFromInt("item_assaultsuit", 0 );
+
+    // Gives kevlar + helmet unless pistols only is on
+    if (gameState != STATE.PISTOLS)
+    {
+        equipper.__KeyValueFromInt("item_assaultsuit", 0 );
+    }
+	else
+    {
+        equipper.__KeyValueFromInt("item_kevlar", 0 );
+    }
+
     equipper.ValidateScriptScope();
 
     // Give things to the player, then destroy the game_player_equip
