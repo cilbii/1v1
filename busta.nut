@@ -193,7 +193,7 @@ function OnPostSpawn() // This function is called at the start of each round
 
         // Scouts only
         case STATE.SCOUTS:
-            selectedWeapon = "weapon_scout";
+            selectedWeapon = "weapon_ssg08";
             break;
     }
 
