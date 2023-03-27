@@ -49,6 +49,7 @@ selectedWeapon <- null;
             ScriptPrintMessageChatAll("\x01 \x03 .awps" + "\x01 \x01 - Enables awps only");
             ScriptPrintMessageChatAll("\x01 \x03 .scouts" + "\x01 \x01 - Enables scouts only");
             ScriptPrintMessageChatAll("\x01 \x03 .pistols" + "\x01 \x01 - Enables pistols only");
+            ScriptPrintMessageChatAll("\x01 \x03 .egg" + "\x01 \x01 - Scrambles the teams");
             ScriptPrintMessageChatAll("\x01 \x03 .commands3" + "\x01 \x01 - Opens third page of commands list");
             break;
 
@@ -57,7 +58,6 @@ selectedWeapon <- null;
             ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 3/3 ========");
             ScriptPrintMessageChatAll("\x01 \x03 .hs" + "\x01 \x01 - Enables headshots only");
             ScriptPrintMessageChatAll("\x01 \x03 !hs" + "\x01 \x01 - Disables headshots only");
-            ScriptPrintMessageChatAll("\x01 \x03 .egg" + "\x01 \x01 - Scrambles the teams");
             break;
 
         // Restart game
