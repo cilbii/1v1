@@ -98,8 +98,18 @@ weaponList <- [
     }
 }.bindenv(this)
 
+// Initializes variable only once
+if (!("counter" in getroottable()))
+{
+    ::counter <- 0;
+}
+
 function OnPostSpawn() // This function is called at the start of each round
 {
+
+    counter++;
+    ScriptPrintMessageChatAll("\x01 \x05 Counter: " + counter);
+
     // Gets a list of all players
     local players = getPlayers();
 
