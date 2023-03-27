@@ -1,5 +1,3 @@
-IncludeScript("1v1/variables.nut");
-
 // List of possible weapons
 weaponList <- [
     "weapon_ak47",
@@ -102,9 +100,6 @@ weaponList <- [
 
 function OnPostSpawn() // This function is called at the start of each round
 {
-    counter++;
-    ScriptPrintMessageChatAll("\x01 \x05 Counter: " + counter);
-
     // Gets a list of all players
     local players = getPlayers();
 
