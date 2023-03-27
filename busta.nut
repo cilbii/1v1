@@ -95,20 +95,51 @@ weaponList <- [
             SendToConsole("mp_scrambleteams");
             break;
 
+        case ".pistols":
+            gameState = STATE.PISTOLS;
+            ScriptPrintMessageChatAll("\x01 \x05 PISTOLS ONLY ENABLED");
+            SendToConsole("mp_restartgame 1");
+            break;
+
+        case ".rifles":
+            gameState = STATE.RIFLES;
+            ScriptPrintMessageChatAll("\x01 \x05 RIFLES ONLY ENABLED");
+            SendToConsole("mp_restartgame 1");
+            break;
+        
+        case ".awps":
+            gameState = STATE.AWPS;
+            ScriptPrintMessageChatAll("\x01 \x05 AWPS ONLY ENABLED");
+            SendToConsole("mp_restartgame 1");
+            break;
+        
+        case ".scouts":
+            gameState = STATE.SCOUTS;
+            ScriptPrintMessageChatAll("\x01 \x05 SCOUTS ONLY ENABLED");
+            SendToConsole("mp_restartgame 1");
+            break;
+
+
     }
 }.bindenv(this)
 
+enum STATE {
+    DEFAULT = "default",
+    RIFLES = "rifles",
+    PISTOLS = "pistols",
+    AWPS = "awps",
+    SCOUTS = "scouts"
+}
+
 // Initializes variable only once
-if (!("counter" in getroottable()))
+if (!("gameState" in getroottable()))
 {
-    ::counter <- 0;
+    ::gameState <- STATE.DEFAULT;
 }
 
 function OnPostSpawn() // This function is called at the start of each round
 {
-
-    counter++;
-    ScriptPrintMessageChatAll("\x01 \x05 Counter: " + counter);
+    ScriptPrintMessageChatAll("\x01 \x05 Game Type: " + gameState);
 
     // Gets a list of all players
     local players = getPlayers();
