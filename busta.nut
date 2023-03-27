@@ -1,4 +1,4 @@
-//List of possible weapons
+// List of possible weapons
 weaponList <- [
     "weapon_ak47",
     "weapon_m4a1"
