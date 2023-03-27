@@ -156,8 +156,6 @@ selectedWeapon <- null;
             ScriptPrintMessageChatAll("\x01 \x05 SCOUTS ONLY ENABLED");
             SendToConsole("mp_restartgame 1");
             break;
-
-
     }
 }.bindenv(this)
 
