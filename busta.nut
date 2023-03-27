@@ -31,7 +31,7 @@ selectedWeapon <- null;
     {
         // Commmand list
         case ".commands":
-            ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 1/2 ========");
+            ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 1/3 ========");
             ScriptPrintMessageChatAll("\x01 \x03 .r" + "\x01 \x01 - Restarts the game");
             ScriptPrintMessageChatAll("\x01 \x03 .end" + "\x01 \x01 - Ends the warmup");
             ScriptPrintMessageChatAll("\x01 \x03 .kick" + "\x01 \x01 - Kicks the bots");
@@ -43,11 +43,21 @@ selectedWeapon <- null;
 
         // Second page of commands
         case ".commands2":
-            ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 2/2 ========");
+            ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 2/3 ========");
+            ScriptPrintMessageChatAll("\x01 \x03 .default" + "\x01 \x01 - Enables default guns only");
+            ScriptPrintMessageChatAll("\x01 \x03 .rifles" + "\x01 \x01 - Enables rifles only");
+            ScriptPrintMessageChatAll("\x01 \x03 .awps" + "\x01 \x01 - Enables awps only");
+            ScriptPrintMessageChatAll("\x01 \x03 .scouts" + "\x01 \x01 - Enables scouts only");
+            ScriptPrintMessageChatAll("\x01 \x03 .pistols" + "\x01 \x01 - Enables pistols only");
+            ScriptPrintMessageChatAll("\x01 \x03 .commands3" + "\x01 \x01 - Opens third page of commands list");
+            break;
+
+        // Third page of commands
+        case ".commands3":
+            ScriptPrintMessageChatAll("\x01 \x05 ======== LIST OF COMMANDS 3/3 ========");
             ScriptPrintMessageChatAll("\x01 \x03 .hs" + "\x01 \x01 - Enables headshots only");
             ScriptPrintMessageChatAll("\x01 \x03 !hs" + "\x01 \x01 - Disables headshots only");
             ScriptPrintMessageChatAll("\x01 \x03 .egg" + "\x01 \x01 - Scrambles the teams");
-            break;
 
         // Restart game
         case ".r":
@@ -112,30 +122,35 @@ selectedWeapon <- null;
             SendToConsole("mp_scrambleteams");
             break;
 
+        // Default guns
         case ".default":
             gameState = STATE.DEFAULT;
             ScriptPrintMessageChatAll("\x01 \x05 DEFAULT GUNS ENABLED");
             SendToConsole("mp_restartgame 1");
             break;
 
+        // Pistols only
         case ".pistols":
             gameState = STATE.PISTOLS;
             ScriptPrintMessageChatAll("\x01 \x05 PISTOLS ONLY ENABLED");
             SendToConsole("mp_restartgame 1");
             break;
 
+        // Rifles only
         case ".rifles":
             gameState = STATE.RIFLES;
             ScriptPrintMessageChatAll("\x01 \x05 RIFLES ONLY ENABLED");
             SendToConsole("mp_restartgame 1");
             break;
         
+        // Awps only
         case ".awps":
             gameState = STATE.AWPS;
             ScriptPrintMessageChatAll("\x01 \x05 AWPS ONLY ENABLED");
             SendToConsole("mp_restartgame 1");
             break;
         
+        // Scouts only
         case ".scouts":
             gameState = STATE.SCOUTS;
             ScriptPrintMessageChatAll("\x01 \x05 SCOUTS ONLY ENABLED");
