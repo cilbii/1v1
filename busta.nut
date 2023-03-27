@@ -58,6 +58,7 @@ selectedWeapon <- null;
             ScriptPrintMessageChatAll("\x01 \x03 .hs" + "\x01 \x01 - Enables headshots only");
             ScriptPrintMessageChatAll("\x01 \x03 !hs" + "\x01 \x01 - Disables headshots only");
             ScriptPrintMessageChatAll("\x01 \x03 .egg" + "\x01 \x01 - Scrambles the teams");
+            break;
 
         // Restart game
         case ".r":
