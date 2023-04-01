@@ -13,6 +13,12 @@ if (!("gameState" in getroottable()))
     ::gameState <- STATE.DEFAULT;
 }
 
+// Counter for printing welcome message
+if (!("counter" in getroottable()))
+{
+    ::counter <- 0;
+}
+
 // List of possible weapons
 weaponList <- [
     "weapon_ak47",
@@ -95,7 +101,7 @@ selectedWeapon <- null;
             SendToConsole("mp_match_restart_delay 12");
             SendToConsole("mp_maxrounds 30"); 
             SendToConsole("mp_halftime 1"); 
-            SendToConsole("mp_overtime_enable 1"); 
+            SendToConsole("mp_overtime_enable 1");
             SendToConsole("sv_cheats 0");
             ScriptPrintMessageChatAll("\x01 \x05 Commands sent");
             break;
@@ -161,7 +167,15 @@ selectedWeapon <- null;
 }.bindenv(this)
 
 function OnPostSpawn() // This function is called at the start of each round
-{
+{   
+    // Prints this message only once.
+    // I hate this. I absolutely hate this. I hate that I had to do it this way, but it was the only way I could get this to work. I don't get why it won't work like I want it to.
+    if (counter == 0 || counter == 1)
+    {
+        ScriptPrintMessageChatAll("\x01 \x05 You can type .commands in chat for a list of commands");
+        counter++;
+    }
+
     // Gets a list of all players
     local players = getPlayers();
 
